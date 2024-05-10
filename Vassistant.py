@@ -7,19 +7,13 @@ import pyttsx3
 class VoiceAssistant:
     """
     This class represents a voice assistant.
-    
-    Attributes:
-        history (list): A list of dictionaries representing the assistant's history.
-        
     Methods:
         listen: Records audio from the user and transcribes it.
         think: Generates a response to the user's input.
         speak: Converts text to speech and plays it.
     """
     def __init__(self):
-        # Set your OpenAI API key
         openai.api_key = ""
-        # Initialize the assistant's history
         self.history = [
                 {"role": "system", "content": "You are a helpful assistant. The user is english. Only speak english."}
             ]
@@ -35,7 +29,6 @@ class VoiceAssistant:
 
         audio = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype=np.int16)
         sd.wait()
-
         # Save the NumPy array to a temporary wav file
         with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_wav_file:
             wavfile.write(temp_wav_file.name, fs, audio)
